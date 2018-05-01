@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout, Menu, Breadcrumb, Icon, Divider } from 'antd';
+import { Route,BrowserRouter  } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom'; 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 import Example from './Example';
@@ -17,7 +19,8 @@ export default class MainLayout extends Component {
     
 
     render() {
-        return <Layout>
+        return <BrowserRouter >
+        <Layout>
         <Header className="header">
           <div className="logo" style={styles}/>
           <Menu
@@ -26,8 +29,16 @@ export default class MainLayout extends Component {
             defaultSelectedKeys={['2']}
             style={{ lineHeight: '64px' }}
           >
-            <Menu.Item key="1">nav 1</Menu.Item>
-            <Menu.Item key="2">nav 2</Menu.Item>
+            <Menu.Item key="1">
+              <NavLink to={'/example'} activeClassName='active'>
+                  <span className='glyphicon glyphicon-home'></span> Example
+              </NavLink>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <NavLink to={'/'} activeClassName='active'>
+                  <span className='glyphicon glyphicon-home'></span> None
+              </NavLink>
+            </Menu.Item>
             <Menu.Item key="3">nav 3</Menu.Item>
           </Menu>
         </Header>
@@ -69,10 +80,14 @@ export default class MainLayout extends Component {
                 minHeight: 280,color: '#636b6f',fontFamily: 'Raleway, sans-serif',fontWeight: '100'
                 // ,height: '100vh' 
                 }}>
-                <Example></Example>
+                  <div>
+                    <Route exact path='/example' component={ Example } />
+                    {/* <Route path='/' component={ <div>什么也没有</div> } /> */}
+                  </div>
             </Content>
           </Layout>
         </Layout>
-      </Layout>;
+      </Layout>
+      </BrowserRouter >;
     }
 }
