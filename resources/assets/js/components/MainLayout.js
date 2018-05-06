@@ -46,16 +46,16 @@ export default class MainLayout extends Component {
           <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={['2']}
+            defaultSelectedKeys={['1']}
             style={{ lineHeight: '64px' }}
           >
             <Menu.Item key="1">
-              <NavLink to={'/example'} activeClassName='active'>
+              <NavLink   to={'/'} activeClassName='active'>
                   <span className='glyphicon glyphicon-home'></span> 示例
-              </NavLink>
+              </NavLink  >
             </Menu.Item>
             <Menu.Item key="2">
-              <NavLink to={'/'} activeClassName='active'>
+              <NavLink to={'/null'} activeClassName='active'>
                   <span className='glyphicon glyphicon-home'></span> 空
               </NavLink>
             </Menu.Item>
@@ -100,8 +100,8 @@ export default class MainLayout extends Component {
             <Content style={{ background: '#fff', padding: 24, margin: 0, 
                 minHeight: 280,color: '#636b6f',fontFamily: 'Raleway, sans-serif',fontWeight: '100'}}>
                   <Switch>
-                    <Route exact path={`/example`} component={ Example } />
-                    <Route exact path={`/`} component={ null } />
+                    <Route exact path={`/`} component={ Example } />
+                    <Route exact path={`/null`} component={ null } />
                     <Route component={NoMatch} />{/*处理404*/}
                     {/* <Route path='/' component={ <div>什么也没有</div> } /> */}
                   </Switch>

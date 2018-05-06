@@ -1,33 +1,39 @@
-0. ��װwamp������Ҫ�õ����ڲ���4���汾��php,����������**php7.1.16**��
-1. ��װapache���°棨����wamp��ԭ����wamp��apacheʵ����ֻ֧��php5�������ṩ���������õ�php7�����ǾͿ���ֱ�Ӳ���wamp��php7�����ϵ�����ã�
-2. ����httpd.conf������php7ģ�飬������ҳ�ļ�֧�֣������ļ�����֧��
-3. ��wamp��php7Ŀ¼�µ�php.ini����һ�ݵ�apache binĿ¼�£�ͬʱ��php7ts.dllҲ������ȥ
-4. ��php7Ŀ¼�µ�ssleay32.dll��libeay32.dll�ļ�������apache binĿ¼�¡�
-5. ʹ��php7��װcomposer
-6. ʹ��composerȫ�ְ�װlaravel
+0. 安装wamp，这里要用到其内部的4个版本的php,我们这里用**php7.1.16**吧
+1. 安装apache最新版（不用wamp的原因是wamp的apache实质上只支持php5，但是提供了配置良好的php7，我们就可以直接采用wamp的php7来完成系列配置）
+2. 配置httpd.conf，加载php7模块，添加主页文件支持，添加文件类型支持
+3. 把wamp的php7目录下的php.ini拷贝一份到apache bin目录下，同时把php7ts.dll也拷贝过去
+4. 将php7目录下的ssleay32.dll和libeay32.dll文件拷贝到apache bin目录下。
+5. 使用php7安装composer
+6. 使用composer全局安装laravel
 7. laravel new blog
-8. ʹ��composer update����composer install����php����
+8. 使用composer update或者composer install更新php依赖
 
 
-**һ����˵������ǰ��8���Ϳ���ֱ�������ˣ����������php artisan serveȥ��������Ȼ��ʹ��apacheҲ�ǿ��Եģ�ע����Ӧ�ķ��񼴿�**��
+**一般来说，做完前面8步就可以直接启动了，这里可以用php artisan serve去启动，当然，使用apache也是可以的，注册相应的服务即可**。
 
-**��ؼ�һ�����ڷ���wamp�����ã�����ֱ��copy��������������**
+**最关键一点在于仿照wamp的配置，或者直接copy它的配置来做。**
 
+前端开发配置
 
+1. 项目根目录下，使用php artisan preset react更换前端脚手架为react。
+2. 安装nodejs（最新的就可以）
+3. 修改package.json, 这里使用最新的antd 3.4.4, 使用npm install安装npm依赖。
+4. 编译前端页面 npm run dev
+5. 启动apache，可以看到启动页面apache的文件不能热更新，所以说只能php+nodejs的方式。
 
-1. ��Ŀ��Ŀ¼�£�ʹ��php artisan preset react����ǰ�˽��ּ�Ϊreact��
-2. ��װnodejs�����µľͿ��ԣ�
-3. �޸�package.json, ����ʹ�����µ�antd 3.4.4, ʹ��npm install��װnpm������
-4. ����ǰ��ҳ�� npm run dev
-5. ����apache�����Կ�������ҳ��apache���ļ������ȸ��£�����˵ֻ��php+nodejs�ķ�ʽ��
+Auth配置
 
+1. 打开mysql，建立好相应的数据库
+2. 关闭apache，配置数据库，通过.env配置。（要等到重启服务器才能生效）
+3. 项目根目录下，php artisan make:auth
+4. 启动php artisan serve
+5. 访问localhost:80/register注册用户
+6. 注意一件事情，如果要用react，那么除了单页应用的id - root，别的div不要用root作为id
+7. 可能有个比较麻烦的问题：就是后台向前端后台传数据可能需要写大量的api
 
-
-1. ��mysql����������Ӧ�����ݿ�
-2. �ر�apache���������ݿ⣬ͨ��.env���á���Ҫ�ȵ�����������������Ч��
-3. ��Ŀ��Ŀ¼�£�php artisan make:auth
-4. ����php artisan serve
-5. ����localhost:80/registerע���û�
-6. ע��һ�����飬���Ҫ��react����ô���˵�ҳӦ�õ�id - root�����div��Ҫ��root��Ϊid
-7. �����и��Ƚ��鷳�����⣺���Ǻ�̨��ǰ�˺�̨�����ݿ�����Ҫд������api
-
+Apache配置
+1. htaccess配置：RewriteRule ^ index.php [L] 重写链接
+2. 配置httpd.conf打开conf/extra/vhost； 加载rewrite 模块
+3. 配置vhost根目录，文件夹目录，权限，重载
+4. 修改hosts以匹配vhost规则
+5. 启动apache，使用虚拟域名访问该网站
