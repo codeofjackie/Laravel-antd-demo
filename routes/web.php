@@ -16,3 +16,8 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/{subs?}', ['middleware' => 'auth', function () {
+    return view('home');
+}])->where(['subs' => '.*']);
+//处理前后端路由冲突

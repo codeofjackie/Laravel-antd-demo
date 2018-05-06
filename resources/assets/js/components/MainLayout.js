@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Layout, Menu, Breadcrumb, Icon, Divider } from 'antd';
-import { Route,BrowserRouter  } from 'react-router-dom';
-import { Link, NavLink } from 'react-router-dom'; 
+import { Route,BrowserRouter,Link, NavLink,Switch  } from 'react-router-dom';
+import { Layout, Menu, Breadcrumb,Dropdown, Icon, Divider } from 'antd';
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 import Example from './Example';
@@ -16,9 +15,30 @@ var styles = {
 }
 
 export default class MainLayout extends Component {
-    
+  Submit(){
+    event.preventDefault();
+    document.getElementById('logout-form').submit();
+  }
 
     render() {
+        const menu = (
+          <Menu>
+            <Menu.Item key="0">
+              <a onClick={this.Submit}>登出</a>
+            </Menu.Item>
+            <Menu.Divider />
+            <Menu.Item key="1">其他</Menu.Item>
+          </Menu>
+        );
+
+        const NoMatch = ({ location }) => (
+          <div>
+            <h3>
+              对不起，找不到 <code>{location.pathname}</code>
+            </h3>
+          </div>
+        );
+
         return <BrowserRouter >
         <Layout>
         <Header className="header">
@@ -31,16 +51,23 @@ export default class MainLayout extends Component {
           >
             <Menu.Item key="1">
               <NavLink to={'/example'} activeClassName='active'>
-                  <span className='glyphicon glyphicon-home'></span> Example
+                  <span className='glyphicon glyphicon-home'></span> 示例
               </NavLink>
             </Menu.Item>
             <Menu.Item key="2">
               <NavLink to={'/'} activeClassName='active'>
-                  <span className='glyphicon glyphicon-home'></span> None
+                  <span className='glyphicon glyphicon-home'></span> 空
               </NavLink>
             </Menu.Item>
-            <Menu.Item key="3">nav 3</Menu.Item>
+            <Dropdown overlay={menu} trigger={['click']}>
+              <a className="ant-dropdown-link" style={{float:"right"}}>
+                {user_name} <Icon type="down" />
+              </a>
+            </Dropdown>
           </Menu>
+          <form id="logout-form" action={`http://${document.location.host}/logout`} method="POST" style={{display: 'none'}}>
+                    <input type="hidden" name="_token" value={csrf_token}/>
+          </form>
         </Header>
         <Layout style={{minHeight: '90vh'}}>
           <Sider style={{ background: '#fff' }}>
@@ -50,23 +77,17 @@ export default class MainLayout extends Component {
               defaultOpenKeys={['sub1']}
               style={{ height: '100%', borderRight: 0 }}
             >
-              <SubMenu key="sub1" title={<span><Icon type="user" />subnav 1</span>}>
-                <Menu.Item key="1">option1</Menu.Item>
-                <Menu.Item key="2">option2</Menu.Item>
-                <Menu.Item key="3">option3</Menu.Item>
-                <Menu.Item key="4">option4</Menu.Item>
+              <SubMenu key="sub1" title={<span><Icon type="user" />子菜单 1</span>}>
+                <Menu.Item key="1">子项1</Menu.Item>
+                <Menu.Item key="2">子项2</Menu.Item>
+                <Menu.Item key="3">子项3</Menu.Item>
+                <Menu.Item key="4">子项4</Menu.Item>
               </SubMenu>
-              <SubMenu key="sub2" title={<span><Icon type="laptop" />subnav 2</span>}>
-                <Menu.Item key="5">option5</Menu.Item>
-                <Menu.Item key="6">option6</Menu.Item>
-                <Menu.Item key="7">option7</Menu.Item>
-                <Menu.Item key="8">option8</Menu.Item>
-              </SubMenu>
-              <SubMenu key="sub3" title={<span><Icon type="notification" />subnav 3</span>}>
-                <Menu.Item key="9">option9</Menu.Item>
-                <Menu.Item key="10">option10</Menu.Item>
-                <Menu.Item key="11">option11</Menu.Item>
-                <Menu.Item key="12">option12</Menu.Item>
+              <SubMenu key="sub2" title={<span><Icon type="laptop" />子菜单 2</span>}>
+                <Menu.Item key="5">子项5</Menu.Item>
+                <Menu.Item key="6">子项6</Menu.Item>
+                <Menu.Item key="7">子项7</Menu.Item>
+                <Menu.Item key="8">子项8</Menu.Item>
               </SubMenu>
             </Menu>
           </Sider>
@@ -77,13 +98,13 @@ export default class MainLayout extends Component {
               <Breadcrumb.Item>App</Breadcrumb.Item>
             </Breadcrumb>
             <Content style={{ background: '#fff', padding: 24, margin: 0, 
-                minHeight: 280,color: '#636b6f',fontFamily: 'Raleway, sans-serif',fontWeight: '100'
-                // ,height: '100vh' 
-                }}>
-                  <div>
-                    <Route exact path='/example' component={ Example } />
+                minHeight: 280,color: '#636b6f',fontFamily: 'Raleway, sans-serif',fontWeight: '100'}}>
+                  <Switch>
+                    <Route exact path={`/example`} component={ Example } />
+                    <Route exact path={`/`} component={ null } />
+                    <Route component={NoMatch} />{/*处理404*/}
                     {/* <Route path='/' component={ <div>什么也没有</div> } /> */}
-                  </div>
+                  </Switch>
             </Content>
           </Layout>
         </Layout>
