@@ -14,6 +14,7 @@
     <script>
         window.Laravel = {};
         window.Laravel.csrf_token=document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        window.Laravel.user_name= {{ Auth::User()->name }};
     </script>    
 
     <!-- Fonts -->
