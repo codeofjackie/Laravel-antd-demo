@@ -8,15 +8,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
     <title>{{ config('app.name', 'Laravel') }} </title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <script>
         window.Laravel = {};
         window.Laravel.csrf_token=document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    </script>
+    </script>    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -64,5 +62,6 @@
     <div id="root">
     </div>
     @endguest
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>
