@@ -3,14 +3,16 @@
 1. 安装apache最新版（不用wamp的原因是wamp的apache实质上只支持php5，但是提供了配置良好的php7，我们就可以直接采用wamp的php7来完成系列配置）
     | 不要忘了安装libapache2_php
 2. 配置httpd.conf，加载php7模块，添加主页文件支持，添加文件类型支持
-    | Ubuntu下使用各种apt 安装
+    | Ubuntu下需要打开php的模块 etc/php/version/cli/php.ini 去掉extension前面的;
+    | 需要启动拓展库,如果提示缺模块，那就用类似于$ sudo apt-get install php7.2-xxx的方式装
+    | 
 3. 把wamp的php7目录下的php.ini拷贝一份到apache bin目录下，同时把php7ts.dll也拷贝过去
 4. 将php7目录下的ssleay32.dll和libeay32.dll文件拷贝到apache bin目录下。
 5. 使用php7安装composer
     | 安装composer
 6. 使用composer全局安装laravel
 7. laravel new blog
-8. 使用composer update或者composer install更新php依赖
+8. 使用composer update或者composer install更新php依赖 注意，还需要将storage文件夹权限提到777 chmod -R 777 storage/
 9. php artisan key:generate(生成app key)
 
 **一般来说，做完前面8步就可以直接启动了，这里可以用php artisan serve去启动，当然，使用apache也是可以的，注册相应的服务即可**。
