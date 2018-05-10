@@ -8,6 +8,7 @@ export default class NavMenu extends Component {
   }
 
   render(){
+    console.log("你要的变量："+window.Laravel.user_name+" "+window.Laravel.csrf_token);
     const menu = <Menu>
         <Menu.Item key="0">
           <a onClick={this.Submit}>登出</a>
