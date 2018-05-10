@@ -35,7 +35,7 @@ export default class NavMenu extends Component {
       </Menu.Item>
       <Dropdown overlay={menu} trigger={['click']}>
         <a className="ant-dropdown-link" style={{float:"right"}}>
-          {/*window.Laravel.user_name*/} <Icon type="down" />
+          {window.Laravel.user_name} <Icon type="down" />
         </a>
       </Dropdown>
     </Menu>

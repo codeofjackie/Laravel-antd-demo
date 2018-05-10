@@ -12,10 +12,10 @@
 
     <!-- Scripts -->
     <script>
-        window.Laravel = {};
-        window.Laravel.csrf_token=document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        window.Laravel.user_name= {{ Auth::User()->name }};
-    </script>    
+        var Laravel = {};
+        Laravel.csrf_token=document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    </script>
+    <script src="{{ asset('js/app.js') }}" defer></script>    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -58,11 +58,11 @@
     </div>
     @else
     <script>
-        window.Laravel.user_name= {{ Auth::User()->name }};
+        Laravel.user_name= {{ Auth::User()->name }};
     </script>
     <div id="root">
     </div>
     @endguest
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    
 </body>
 </html>
