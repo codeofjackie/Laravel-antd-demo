@@ -18,6 +18,7 @@ import { render } from 'react-dom';
 import MainLayout from './layouts/MainLayout'
 import 'antd/dist/antd.css';
 
+console.log("aha");
 render(
    <MainLayout></MainLayout>,document.getElementById('root')
 )
