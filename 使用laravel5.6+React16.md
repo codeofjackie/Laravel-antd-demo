@@ -1,13 +1,17 @@
 0. 安装wamp，这里要用到其内部的4个版本的php,我们这里用**php7.1.16**吧
+    | Ubuntu下的php只有旧版，所以需要使用更新后的第三方源来操作
 1. 安装apache最新版（不用wamp的原因是wamp的apache实质上只支持php5，但是提供了配置良好的php7，我们就可以直接采用wamp的php7来完成系列配置）
+    | 不要忘了安装libapache2_php
 2. 配置httpd.conf，加载php7模块，添加主页文件支持，添加文件类型支持
+    | Ubuntu下使用各种apt 安装
 3. 把wamp的php7目录下的php.ini拷贝一份到apache bin目录下，同时把php7ts.dll也拷贝过去
 4. 将php7目录下的ssleay32.dll和libeay32.dll文件拷贝到apache bin目录下。
 5. 使用php7安装composer
+    | 安装composer
 6. 使用composer全局安装laravel
 7. laravel new blog
 8. 使用composer update或者composer install更新php依赖
-
+9. php artisan key:generate(生成app key)
 
 **一般来说，做完前面8步就可以直接启动了，这里可以用php artisan serve去启动，当然，使用apache也是可以的，注册相应的服务即可**。
 
@@ -25,7 +29,7 @@ Auth配置
 
 1. 打开mysql，建立好相应的数据库
 2. 关闭apache，配置数据库，通过.env配置。（要等到重启服务器才能生效）
-3. 项目根目录下，php artisan make:auth
+3. 项目根目录下，php artisan make:auth 然后php artisan make:migration创建表格
 4. 启动php artisan serve
 5. 访问localhost:80/register注册用户
 6. 注意一件事情，如果要用react，那么除了单页应用的id - root，别的div不要用root作为id
@@ -33,7 +37,8 @@ Auth配置
 
 Apache配置
 1. htaccess配置：RewriteRule ^ index.php [L] 重写链接
-2. 配置httpd.conf打开conf/extra/vhost； 加载rewrite 模块
+2. 配置httpd.conf打开conf/extra/vhost； 加载rewrite 模块 
+    | 对于Ubuntu来说使用a2enmod rewrite加载
 3. 配置vhost根目录，文件夹目录，权限，重载
 4. 修改hosts以匹配vhost规则
 5. 启动apache，使用虚拟域名访问该网站

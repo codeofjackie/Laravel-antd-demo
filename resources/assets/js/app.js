@@ -15,7 +15,7 @@ require('./bootstrap');
 
 import React from 'react';
 import { render } from 'react-dom';
-import MainLayout from './components/MainLayout'
+import MainLayout from './layouts/MainLayout'
 import 'antd/dist/antd.css';
 
 render(
