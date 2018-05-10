@@ -14,7 +14,8 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script>
-        var csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        window.Laravel = {};
+        window.Laravel.csrf_token=document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     </script>
 
     <!-- Fonts -->
@@ -58,7 +59,7 @@
     </div>
     @else
     <script>
-        var user_name = <?php echo Auth::User()->name; ?>;
+        window.Laravel.user_name= {{ Auth::User()->name }};
     </script>
     <div id="root">
     </div>
