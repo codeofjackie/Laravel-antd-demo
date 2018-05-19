@@ -24,8 +24,8 @@ export default class Map extends Component {
 
     print(){
         mapboxgl.accessToken = 'pk.eyJ1IjoiY29kZW9mamFja2llIiwiYSI6ImNqaDc2dXE5OTA0OWEycXMwNHkxbzRhbjUifQ.dJofzeR0LJuNLOAEA_28Dw';
-        var map = new mapboxgl.Map({
-            container: this.props.id,
+        const map = new mapboxgl.Map({
+            container: this.mapContainer,
             style: 'mapbox://styles/mapbox/streets-v9',
             center: [114.45, 30.57],
             zoom: 10.7
@@ -81,6 +81,6 @@ export default class Map extends Component {
     }
 
     render() {
-      return <div id={this.props.id} ref={this.props.id} style={mapstyle}></div>;
+      return <div ref={el => this.mapContainer = el} style={mapstyle}></div>;
     }
 }
