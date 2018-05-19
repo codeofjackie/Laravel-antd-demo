@@ -12,9 +12,7 @@ const { Content } = Layout;
 export default class SideMenu extends Component {
 
     render(){
-        var MapCanvas = ()=><Map
-            src="./map.html"
-         />;
+        var MapCanvas = ()=><Map id="Mymap"/>;
 
         return <Layout style={{ padding: '0 24px 24px' }}>
         <Breadcrumb style={{ margin: '16px 0' }}>
