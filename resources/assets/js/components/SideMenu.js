@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import { NavLink  } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import {faMap,faTachometerAlt} from '@fortawesome/fontawesome-free-solid'
+import {faMap,faTachometerAlt,faChartLine} from '@fortawesome/fontawesome-free-solid'
 
 import { Menu, Icon } from 'antd';
 
@@ -22,8 +22,8 @@ export default class SideMenu extends Component {
             </NavLink  >
           </Menu.Item>
           <Menu.Item key="2">
-            <NavLink   to={'/'} activeClassName='active'>
-                空
+            <NavLink   to={'/chart'} activeClassName='active'>
+            <FontAwesomeIcon icon={faChartLine}/>　图表
             </NavLink  >
           </Menu.Item>
           <Menu.Item key="3">子项3</Menu.Item>
