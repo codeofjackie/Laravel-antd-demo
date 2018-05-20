@@ -1,13 +1,12 @@
 import React,{Component} from 'react';
 import { Route, Switch  } from 'react-router-dom';
-import { Layout,Breadcrumb } from 'antd';
+import { Layout,Breadcrumb, Slider } from 'antd';
 
 import Map from "../pages/Map";
 import _404 from '../pages/_404';
+import  SliderChart from '../pages/SliderChart';
 
 const { Content } = Layout;
-
-
 
 export default class SideMenu extends Component {
 
@@ -34,6 +33,7 @@ export default class SideMenu extends Component {
                 <Switch>
                 <Route exact path={`/`} component={ null } />
                 <Route exact path={`/map`} component={ MapCanvas }  />
+                <Route exact path={`/chart`} component={ SliderChart }  />
                 <Route component={ _404 } />{/*处理404*/}
                 </Switch>
         </Content>
